@@ -1,3 +1,7 @@
+
+const apiUrl = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/"
+
+
 function escreverArquivo(content) { 
     // writeFile function is defined. 
     // Fire off the request to /form.php
@@ -13,34 +17,8 @@ function escreverArquivo(content) {
 }
 
 function get_estados(){
-    $.get("./helpers/estados.php", function(data){
-        // alert("Data: " + data + "\nStatus: " + status);
-        var obj = JSON.parse(data);
 
-        console.log('Listando ' + obj.length + ' Estados Brasileiros');
-        
-        // var indexStateID = 469995;
-        // var indexCityID = 782485;
-        var line = 0;
-
-        for(line; line < obj.length; line++){
-            // console.log(obj[line].id)
-
-            var id = obj[line].id;
-            var sigla = obj[line].sigla;
-            var nome = obj[line].nome;
-
-            console.log('ID: ' + id + ' Estado: ' + nome + ' Sigla: ' + sigla )
-        }
-
-      });
-}
-
-
-function get_cidades(){
-    
-    id = '33'
-    url = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/" + id + "/municipios";
+    url = apiUrl;
 
     fetch(url).then(function(response) {
         return response.json();
@@ -48,7 +26,46 @@ function get_cidades(){
         console.log(data);
       }).catch(function() {
         console.log("Booo");
-      });
+});
+
+    // $.get("./helpers/estados.php", function(data){
+    //     // alert("Data: " + data + "\nStatus: " + status);
+    //     var obj = JSON.parse(data);
+
+    //     console.log('Listando ' + obj.length + ' Estados Brasileiros');
+        
+    //     // var indexStateID = 469995;
+    //     // var indexCityID = 782485;
+    //     var line = 0;
+
+    //     for(line; line < obj.length; line++){
+    //         // console.log(obj[line].id)
+
+    //         var id = obj[line].id;
+    //         var sigla = obj[line].sigla;
+    //         var nome = obj[line].nome;
+
+    //         console.log('ID: ' + id + ' Estado: ' + nome + ' Sigla: ' + sigla )
+    //     }
+
+    //   });
+}
+
+
+function get_cidades(id){
+
+    // id = '33'
+    url = apiUrl + id + "/municipios";
+
+    fetch(url).then(function(response) {
+        return response.json();
+      }).then(function(data) {
+        console.log(data);
+      }).catch(function() {
+        console.log("Booo");
+    });
+
+
     // httpGet(url);
     // $.get("./helpers/cidades.php", function(data){
     //     // alert("Data: " + data + "\nStatus: " + status);
