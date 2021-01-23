@@ -34,7 +34,8 @@
     <h5>Estados: </h5>
     <div class="mb-5">
         <p>
-            <span>INSERT INTO `state` (`idstate`, `country_code`, `sta_name`, `active`) VALUES</span><br>
+            <span>
+            INSERT INTO `state` (`idstate`, `sta_name`, `sta_slug`, `country_code`, `active`) VALUES</span><br>
             <span>(1000866, 3, 'Ontario', 1),</span>
         </p>
     </div>
@@ -68,42 +69,4 @@
         // alert("Hello World!"); 
         get_cidades(id);
     });
-</script>
-
-
-
-
-<script>
-
-   // le arquivo com as variaveis
-//    var conteudo = '';
-   
-//    document.getElementById('file').onchange = function(){
-
-//     var file = this.files[0];
-
-//     var reader = new FileReader();
-//     reader.onload = function(progressEvent){
-//     // Entire file
-//     // console.log(this.result);
-
-//     // By lines
-//     var lines = this.result.split('\n');
-//         for(var line = 0; line < lines.length; line++){
-//             str = lines[line];
-//             $val = str.split(",", 5);
-//             retorno = String($val) + '),';
-//             // console.log(retorno);
-//             conteudo += retorno + '\n';
-//         }
-//         console.log(conteudo);
-//         escreverArquivo(conteudo);
-//     };
-//     // conteudo = reader.readAsText(file);
-//     reader.readAsText(file);
-//     // debugger
-// };
-
-
-
 </script>

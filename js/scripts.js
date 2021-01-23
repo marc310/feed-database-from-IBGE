@@ -1,20 +1,13 @@
 
 const apiUrl = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/"
+const geo = "http://www.geonames.org/childrenJSON?geonameId=3469034"
+// const indexStateID = 39999;
+// const indexCityID = 792999;
+const S = ', '
+
+const estadoInsert = 'INSERT INTO `state` (`idstate`, `sta_name`, `sta_slug`, `country_code`, `active`) VALUES'
 
 
-function escreverArquivo(content) { 
-    // writeFile function is defined. 
-    // Fire off the request to /form.php
-    conteudo = String(content);
-        $.ajax({
-        type: 'POST',
-        url: "write.php",
-        data: {conteudo:conteudo},
-            success: function(result) {
-                console.log('the data was successfully sent to the server');
-            }
-        });
-}
 
 function get_estados(){
 
@@ -23,7 +16,45 @@ function get_estados(){
     fetch(url).then(function(response) {
         return response.json();
       }).then(function(data) {
-        console.log(data);
+        //   console.log(data);
+        //   var obj = JSON.parse(data);
+        //   console.log(obj);
+
+        console.log('Listando ' + data.length + ' Estados Brasileiros');
+        
+        var line = 0;
+        var content = ''
+
+        content += estadoInsert
+
+        // console.log(estadoInsert)
+
+        for(line; line < data.length; line++){
+            // console.log(data[line].id)
+
+            var id = data[line].id;
+            var sg = data[line].sigla;
+            var n = data[line].nome;
+
+            // formata para inserir string com ''
+            nome = "'" + n + "'"
+            sigla = "'" + sg + "'"
+
+            // console.log('ID: ' + id + ' Estado: ' + nome + ' Sigla: ' + sigla )
+            // estado sql format fields
+            // idstate	sta_name	country_code	active	modified	date_created
+            // use 1 for country_code && 1 for active
+            b = line + 1 < data.length ? ',' : ';'
+
+            fieldLine = '(' + id + S + nome + S + sigla + S + 1 + S + 1 + ')' + b
+
+            // console.log(fieldLine)
+
+            content += fieldLine + '\n';
+        }
+        escreverArquivo(content)
+        console.log(content)
+
       }).catch(function() {
         console.log("Booo");
 });
@@ -122,3 +153,20 @@ function get_cidades(id){
 //     reader.readAsText(file);
 
 // }
+
+
+function escreverArquivo(content) { 
+    // writeFile function is defined. 
+    // Fire off the request to /form.php
+    conteudo = String(content);
+    script_write = "./helpers/write.php";
+
+        $.ajax({
+        type: 'POST',
+        url: script_write,
+        data: {conteudo:conteudo},
+            success: function(result) {
+                console.log('the data was successfully sent to the server');
+            }
+        });
+}
