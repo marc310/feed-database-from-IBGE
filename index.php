@@ -15,8 +15,8 @@
     <h1>Retorna Dados do IBGE</h1>
 
     <div class="mb-5 mt-5">
-        <button id="estados">get estados</button>
-        <button id="cidades">get cidades</button>
+        <button id="data_region">get Data</button>
+        <!-- <button id="cidades">get cidades</button> -->
     </div>
 <hr/>
     <div class="mb-5 mt-5">
@@ -43,6 +43,7 @@
     <h5>Cidades: </h5>
     <div class="mb-5">
         <p>
+        <blockquote>idcity	state_code	cit_name	cit_native	cit_slug	country_code	date_created	modified</blockquote>
             <span>INSERT INTO `city` (`idcity`, `state_code`, `cit_name`, `cit_native`, `cit_slug`, `country_code`) VALUES</span><br>
             <span>(1016146, 1000875, 'Abbotsford', NULL, 'abbotsford', 3),</span>
         </p>
@@ -57,16 +58,10 @@
 <script type="text/javascript" src="js/scripts.js"></script>
 
 <script>
-    estados = document.getElementById('estados');
-    cidades = document.getElementById('cidades');
+    data_region = document.getElementById('data_region');
 
-    estados.addEventListener("click", function(){ 
+    data_region.addEventListener("click", function(){ 
         // alert("Hello World!"); 
-        get_estados();
-    });
-
-    cidades.addEventListener("click", function(){ 
-        // alert("Hello World!"); 
-        get_cidades(id);
+        get_region_data();
     });
 </script>
