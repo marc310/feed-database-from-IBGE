@@ -32,8 +32,8 @@ async function get_region_data(){
             var n = data[line].nome;
 
             // formata para inserir string com ''
-            nome = "'" + n + "'"
-            sigla = "'" + sg + "'"
+            nome = '"' + n + '"'
+            sigla = '"' + sg + '"'
 
             b = ';'
 
@@ -61,7 +61,7 @@ async function get_region_data(){
                     var nome = res[line].nome;
                     
                     b = line + 1 < res.length ? ',' : ';'
-                    cityLine = '(' + id + S + idEstado + S + nome + S + 'NULL' + S + nome.toLowerCase() + S + 1 + ')' + b
+                    cityLine = '(' + id + S + idEstado + S + '"'+nome+'"' + S + 'NULL' + S + '"'+nome.toLowerCase()+'"' + S + 1 + ')' + b
                     content += cityLine + '\n';
                 }
                 // end for city
